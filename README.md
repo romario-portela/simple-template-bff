@@ -1,4 +1,4 @@
 ### Simple Template Spring Boot BFF
 
-Spring Cloud Feign
-Spring Retry
+# Spring Cloud Feign
+# Spring Retry
