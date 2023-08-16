@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+    <springProperty scope="context" name="LOG_FOLDER" source="log.folder" defaultValue="/logs"/>
+
+    <property name="PATTERN_SYSTEM" value="%d{HH:mm:ss.SSS} [%-5level] %X{TID} [%C{0}:%L] - %msg%n %ex{short}"/>
+    <property name="PATTERN_ERROR" value="%d{HH:mm:ss.SSS} [%-5level] %X{TID} [%C{0}:%L] - %msg%n %ex{full}"/>
+    <springProperty name="application-name" source="spring.application.name" defaultValue="template-spring-boot-bff"/>
+    <property name="MAX_FILE_SIZE" value="5MB"/>
+
+    <springProfile name="dev,local">
+        <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>${PATTERN_ERROR}</pattern>
+                <charset>utf8</charset>
+            </encoder>
+        </appender>
+
+        <logger name="br.com.template" level="DEBUG"/>
+
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="prod,pp,tst,hm">
+        <appender name="FILE_INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${LOG_FOLDER}/${application-name}-system.log</file>
+            <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+                <fileNamePattern>${LOG_FOLDER}/${application-name}-system-%d{dd-MM-yyyy}.%i.log</fileNamePattern>
+                <maxFileSize>${MAX_FILE_SIZE}</maxFileSize>
+            </rollingPolicy>
+            <encoder>
+                <pattern>${PATTERN_SYSTEM}</pattern>
+            </encoder>
+        </appender>
+
+        <appender name="FILE_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${LOG_FOLDER}/${application-name}-error.log</file>
+            <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+                <fileNamePattern>${LOG_FOLDER}/${application-name}-error-%d{dd-MM-yyyy}.%i.log</fileNamePattern>
+                <maxFileSize>${MAX_FILE_SIZE}</maxFileSize>
+            </rollingPolicy>
+            <encoder>
+                <pattern>${PATTERN_ERROR}</pattern>
+            </encoder>
+            <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+                <level>ERROR</level>
+            </filter>
+        </appender>
+
+        <logger name="br.com.template" level="INFO"/>
+
+        <root level="INFO">
+            <appender-ref ref="FILE_INFO"/>
+            <appender-ref ref="FILE_ERROR"/>
+        </root>
+    </springProfile>
+
+</configuration>

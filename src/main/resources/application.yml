@@ -1,0 +1,72 @@
+spring:
+  profiles:
+    active: @activatedProperties@
+  application:
+    name: Template Spring Boot BFF
+
+server:
+  servlet:
+    context-path: /template-spring-boot-bff
+  port: 9091
+
+###  Swagger  ###
+swagger:
+  protocolo: http
+springfox:
+  documentation:
+    swagger:
+      v2:
+        path: /api-docs
+
+management:
+  server:
+    port: ${server.port}
+  endpoint:
+    metrics:
+      enabled: true
+    web:
+      exposure:
+        include: '*'
+    prometheus:
+      enabled: true
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+  security:
+    enabled: false
+
+#circuit breaker
+resilience4j.circuitbreaker:
+  instances:
+    auth:
+      minimumNumberOfCalls: 2
+      slidingWindowSize: 4
+
+#Retry
+retry:
+  maxAttempts: 2
+  maxDelay: 500
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: BASIC
+
+---
+
+spring:
+  profiles:
+    active: dev
+  kafka:
+    bootstrap-servers: localhost:9093
+
+basePath: http://localhost:${server.port}${server.servlet.context-path}/
+
+external:
+  api:
+    example:
+      uri: http://localhost:9090/template-spring-boot-java17
