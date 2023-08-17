@@ -1,4 +1,4 @@
-package br.com.template.aplicacao.security.configuration;
+package br.com.template.aplicacao.config;
 
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
