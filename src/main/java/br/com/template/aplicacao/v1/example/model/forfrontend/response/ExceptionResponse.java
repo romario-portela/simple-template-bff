@@ -1,8 +1,3 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by FernFlower decompiler)
-//
-
 package br.com.template.aplicacao.v1.example.model.forfrontend.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;

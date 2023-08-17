@@ -61,8 +61,6 @@ feign:
 spring:
   profiles:
     active: dev
-  kafka:
-    bootstrap-servers: localhost:9093
 
 basePath: http://localhost:${server.port}${server.servlet.context-path}/
 
