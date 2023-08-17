@@ -7,4 +7,5 @@
 #### Spring Security
 #### Spring Cloud Feign
 #### Spring Retry
+#### Mapstuct
 #### Swagger Documentation
