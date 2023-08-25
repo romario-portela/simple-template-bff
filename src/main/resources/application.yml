@@ -68,3 +68,29 @@ external:
   api:
     example:
       uri: http://localhost:9090/template-spring-boot-java17
+
+---
+
+spring:
+  profiles:
+    active: tst
+
+basePath: http://localhost:${server.port}${server.servlet.context-path}/
+
+external:
+  api:
+    example:
+      uri: http://localhost:9090/template-spring-boot-java17
+
+---
+
+spring:
+  profiles:
+    active: hm
+
+basePath: http://localhost:${server.port}${server.servlet.context-path}/
+
+external:
+  api:
+    example:
+      uri: http://localhost:9090/template-spring-boot-java17

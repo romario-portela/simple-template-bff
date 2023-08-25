@@ -9,7 +9,6 @@
     <springProperty name="application-name" source="spring.application.name" defaultValue="template-spring-boot-bff"/>
     <property name="MAX_FILE_SIZE" value="5MB"/>
 
-    <springProfile name="dev,local">
         <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
             <encoder>
                 <pattern>${PATTERN_ERROR}</pattern>
@@ -22,9 +21,6 @@
         <root level="INFO">
             <appender-ref ref="CONSOLE"/>
         </root>
-    </springProfile>
-
-    <springProfile name="prod,pp,tst,hm">
         <appender name="FILE_INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
             <file>${LOG_FOLDER}/${application-name}-system.log</file>
             <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
@@ -56,6 +52,4 @@
             <appender-ref ref="FILE_INFO"/>
             <appender-ref ref="FILE_ERROR"/>
         </root>
-    </springProfile>
-
 </configuration>

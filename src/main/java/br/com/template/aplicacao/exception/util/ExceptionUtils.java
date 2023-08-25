@@ -21,10 +21,10 @@ public class ExceptionUtils {
                                                          String suggestedApplicationAction) {
 
         var msgSugestaoAcaoUsuario = MessageResource.getInstance()
-                .getMessage(ExceptionConstants.MessageConstants.SUGESTAO_ACAO_USUARIO);
+                .getMessage(ExceptionConstants.MessageConstants.EXAMPLE_MESSAGE);
 
         var msgSugestaoAcaoAplicacao = MessageResource.getInstance()
-                .getMessage(ExceptionConstants.MessageConstants.SUGESTAO_ACAO_APLICACAO);
+                .getMessage(ExceptionConstants.MessageConstants.EXAMPLE_MESSAGE);
 
         return GenericException.builder()
                 .status(status)
